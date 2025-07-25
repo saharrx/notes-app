@@ -42,3 +42,18 @@ def create_note():
 
     return jsonify({"message": "Note created successfully"}), 201
 
+
+@notes.route('/notes', methods=['PUT'])
+@jwt_required
+def update_note(note_id): #u should pass the note id in url
+    user_id = get_jwt_identity()
+    note = Note.query.filter_by(id=note_id, user_id=user_id).first()
+    if not note:
+        return jsonify({"error":"Note not found"}), 404
+    
+    data = request.get_json()
+    note.title = data.get('title', note.title)
+    note.content = data.get('content', note.content)
+    db.session.commit()
+
+    return jsonify({"message": "Note updated"}), 200
