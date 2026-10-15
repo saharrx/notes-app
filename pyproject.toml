@@ -1,0 +1,16 @@
+[project]
+name = "notes-app"
+version = "0.1.0"
+description = "Notes REST API with FastAPI, PostgreSQL and JWT auth"
+authors = [
+    { name = "Sahar", email = "134833565+saharrx@users.noreply.github.com" }
+]
+requires-python = ">=3.12"
+dependencies = [
+    "fastapi[standard]>=0.143.1",
+    "pydantic-settings>=2.16.0",
+]
+
+[build-system]
+requires = ["uv_build>=0.13.1,<0.14.0"]
+build-backend = "uv_build"
