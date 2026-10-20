@@ -1,6 +1,6 @@
 from datetime import datetime
 
-from sqlalchemy import CheckConstraint, DateTime, ForeignKey, String, Text, func
+from sqlalchemy import CheckConstraint, DateTime, ForeignKey, String, Text, func, false
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 
 from notes_app.db import Base
@@ -41,3 +41,4 @@ class Note(Base):
 
     # Not a column: note.owner gives you the User object.
     owner: Mapped["User"] = relationship(back_populates="notes")
+    pinned: Mapped[bool] = mapped_column(server_default=false())
