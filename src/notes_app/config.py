@@ -14,6 +14,7 @@ class Settings(BaseSettings):
 
     app_name: str = "Notes API"
     environment: str = "development"
+    database_url: str
 
 
 @lru_cache

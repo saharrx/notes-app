@@ -1,0 +1,21 @@
+services:
+  db:
+    image: postgres:18
+    environment:
+      # Dev-only credentials. The postgres image creates this user and database
+      # on first start.
+      POSTGRES_USER: notes
+      POSTGRES_PASSWORD: notes
+      POSTGRES_DB: notes
+    ports:
+      - "5432:5432"   # host:container, so tools on your Mac can reach it
+    volumes:
+      - pgdata:/var/lib/postgresql   # keep data when the container is recreated
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U notes -d notes"]
+      interval: 2s
+      timeout: 3s
+      retries: 15
+
+volumes:
+  pgdata:
