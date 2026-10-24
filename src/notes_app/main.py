@@ -6,11 +6,12 @@ from sqlalchemy.orm import Session
 
 from notes_app.config import get_settings
 from notes_app.db import get_db
-from notes_app.config import get_settings
+from notes_app.routers import auth
 
 settings = get_settings()
 
 app = FastAPI(title=settings.app_name, version="0.1.0")
+app.include_router(auth.router)
 
 
 @app.get("/health")
