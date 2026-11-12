@@ -25,3 +25,28 @@ class Token(BaseModel):
     access_token:str
     token_type: str = "bearer"
 
+
+class NoteCreate(BaseModel):
+    title: str = Field(min_length=1, max_length=200)
+    content: str = Field(min_length=1)
+    pinned: bool = False
+
+
+class NoteUpdate(BaseModel):
+    """For PATCH: every field is optional, only the ones sent are changed."""
+
+    title: str | None = Field(default=None, min_length=1, max_length=200)
+    content: str | None = Field(default=None, min_length=1)
+    pinned: bool | None = None
+
+
+class NoteOut(BaseModel):
+    model_config = ConfigDict(from_attributes=True)
+
+    id: int
+    title: str
+    content: str
+    pinned: bool
+    owner_id: int
+    created_at: datetime
+    updated_at: datetime
