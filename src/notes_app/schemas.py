@@ -1,4 +1,5 @@
 from datetime import datetime
+from typing import Literal
 
 from pydantic import BaseModel, ConfigDict, Field
 
@@ -50,3 +51,7 @@ class NoteOut(BaseModel):
     owner_id: int
     created_at: datetime
     updated_at: datetime
+
+
+class RoleUpdate(BaseModel):
+    role: Literal["user", "admin"]
